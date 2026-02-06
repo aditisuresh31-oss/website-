@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditi Suresh</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #000;
+            background: linear-gradient(to bottom, #f5f5f5, #e8e8e8);
+            min-height: 100vh;
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 0px;
+            line-height: 1.2;
+            background-color: #ece7db;
+            display: inline-block;
+            padding: 2px 6px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            margin-bottom: 16px;
+            font-weight: normal;
+            margin-top: 0px;
+        }
+        
+        .bio {
+            margin-bottom: 48px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section-header {
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            margin-bottom: 0;
+            background-color: #ece7db;
+            display: inline-block;
+            padding: 2px 6px;
+        }
+
+        .section-header::before {
+            content: '[';
+        }
+
+        .section-header::after {
+            content: ']';
+        }
+
+        .section-header:hover {
+            opacity: 0.7;
+        }
+
+        .section-content {
+            display: none;
+            margin-top: 16px;
+            line-height: 1.6;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        a {
+            color: #0000EE;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+        
+        .subtitle a {
+            text-decoration: none;
+        }
+
+        .footer-links {
+            margin-top: 60px;
+            padding-top: 20px;
+        }
+
+        .footer-links a {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Aditi Suresh</h1>
+    <p class="subtitle"><a href="mailto:as21926@nyu.edu">as21926@nyu.edu</a></p>
+
+    <p class="bio">I'm a graduate student at NYU Steinhardt studying media theory and the internet. Originally from New Delhi, India, I hold an undergraduate degree in polisci & economics from <a href="https://lsr.edu.in/">LSR</a>. I'm deeply inspired by what's possible in the machine age and love learning about new technologies & trends.</p>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">Previous Work</div>
+        <div class="section-content">
+            <p>* For nearly a year, I wrote about AI and the developer/startup ecosystem at Analytics India Magazine in Bangalore. Before that, I was part of Edelman's health team, where I contributed to meaningful campaigns helping clients build their India presence.</p>
+            <p>* During undergrad, I led my department's editorial publication, accessible <a href="https://drive.google.com/file/d/12DE7H-j22KYxeEAbJWbYzBWg3uQGm524/view?usp=sharing">here</a>.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">Questions</div>
+        <div class="section-content">
+            <p>These are some questions that I find interesting, inspired by <a href="https://patrickcollison.com/questions">Patrick Collison</a>. I'll keep updating this.</p>
+            <p>* Why was Plato against writing, even as, ironically, everything we know about Socrates comes from his writings?</p>
+            <p>* Is the endgame of all content eventually just video? Thinking about how even Substack, a writing platform, recently tapped into that format.</p>
+            <p>* Why isn't all slop equal? Why do some people psychologically forgive human slop more readily than machine slop? (all slop is bad!)</p>
+            <p>* How does nostalgia or cultural attachment influence how we value old methods, even when better alternatives exist?</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">Etc</div>
+        <div class="section-content">
+            <p>I love discovering new music all the time. Currently, I'm bumping Fred again's <a href="https://open.spotify.com/album/1Lhv9Fe2KRk0NW3I14HsVY?si=jl9T-HsGQbqLKCzqMTL58Q">USB</a>. My all time favorite is <a href="https://open.spotify.com/album/3mH6qwIy9crq0I9YQbOuDf?si=tUqf3qqTSGOy0oDmSuuQSA">Blonde</a> by Frank Ocean, who IMO is a Pulitzer-level songwriter.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-header" onclick="toggleSection(this)">Contact</div>
+        <div class="section-content">
+            <p>Please say hi! I'm reachable via <a href="https://www.linkedin.com/in/aditi-suresh-94384b58/">LinkedIn</a>, <a href="https://x.com/aditisuresh12">X</a>, or <a href="mailto:as21926@nyu.edu">as21926@nyu.edu</a></p>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            content.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
