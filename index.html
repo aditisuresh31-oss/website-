@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abhishek Suresh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #000000;
+    --card: #141414;
+    --card-hover: #1c1c1c;
+    --border: rgba(255,255,255,0.1);
+    --text: #ffffff;
+    --muted: #888888;
+    --subtle: #555555;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* HOME */
+  #page-home {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 24px;
+    text-align: center;
+  }
+  #page-home.active { display: flex; }
+
+  .home-greeting {
+    font-size: clamp(44px, 8vw, 88px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    margin-bottom: 14px;
+  }
+  .home-sub {
+    font-size: 17px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 64px;
+  }
+  .home-cards {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+  }
+  .home-card {
+    flex: 1;
+    min-width: 200px;
+    max-width: 270px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px 24px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+  .home-card:hover {
+    background: var(--card-hover);
+    border-color: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+  }
+  .home-card-title { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+  .home-card-arrow { font-size: 18px; color: var(--muted); transition: transform 0.2s, color 0.2s; }
+  .home-card:hover .home-card-arrow { transform: translateX(4px); color: var(--text); }
+
+  /* INNER PAGES */
+  .inner-page {
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 64px 24px 120px;
+  }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--muted);
+    cursor: pointer; margin-bottom: 48px;
+    background: none; border: none;
+    font-family: var(--font);
+    transition: color 0.2s;
+    padding: 0;
+  }
+  .back-btn:hover { color: var(--text); }
+  .back-btn svg { transition: transform 0.2s; }
+  .back-btn:hover svg { transform: translateX(-3px); }
+
+  .page-title {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 12px; }
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  .exp-card-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 3px;
+  }
+  .exp-card-company { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+  .exp-card-date { font-size: 13px; color: var(--muted); white-space: nowrap; margin-left: 16px; padding-top: 1px; }
+  .exp-card-role { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  .exp-card-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .exp-card-bullets li {
+    font-size: 14px; color: #cccccc;
+    padding: 8px 0 8px 14px;
+    border-left: 2px solid #2a2a2a;
+    font-weight: 300; line-height: 1.55;
+  }
+
+  /* PROJECTS */
+  .proj-list { display: flex; flex-direction: column; gap: 12px; }
+  .proj-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .proj-card:hover { background: var(--card-hover); border-color: rgba(255,255,255,0.18); }
+  .proj-card-title { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .proj-tag {
+    font-size: 12px; color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+  .proj-desc { font-size: 14px; color: #aaaaaa; line-height: 1.6; font-weight: 300; }
+  .proj-desc strong { color: #dddddd; font-weight: 500; }
+
+  /* ABOUT */
+  .about-body p { font-size: 15px; color: #bbbbbb; font-weight: 300; margin-bottom: 18px; line-height: 1.75; }
+  .about-body p strong { color: var(--text); font-weight: 500; }
+  .about-body a { color: #fff; text-decoration: underline; text-decoration-color: #444; }
+  .skills-section { margin-top: 40px; }
+  .skills-section h3 {
+    font-size: 11px; font-weight: 600; color: var(--subtle);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;
+  }
+  .skills-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .skill-pill {
+    font-size: 13px; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 8px;
+    padding: 5px 12px; background: var(--card);
+  }
+
+  @media (max-width: 540px) {
+    .home-cards { flex-direction: column; align-items: stretch; }
+    .home-card { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <p class="home-greeting">Hey, I'm Abhishek</p>
+  <p class="home-sub">Data &amp; AI engineer &amp; builder</p>
+  <div class="home-cards">
+    <div class="home-card" onclick="showPage('experience')">
+      <div class="home-card-title">Experience</div>
+      <div class="home-card-arrow">→</div>
+    </div>
+    <div class="home-card" onclick="showPage('projects')">
+      <div class="home-card-title">Projects</div>
+      <div class="home-card-arrow">→</div>
+    </div>
+    <div class="home-card" onclick="showPage('about')">
+      <div class="home-card-title">About</div>
+      <div class="home-card-arrow">→</div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div id="page-experience" class="page">
+  <div class="inner-page">
+    <button class="back-btn" onclick="showPage('home')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8L10 13" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back
+    </button>
+    <h1 class="page-title">Experience</h1>
+    <div class="exp-list">
+
+      <div class="exp-card">
+        <div class="exp-card-header">
+          <div class="exp-card-company">Alchemy Inc</div>
+          <div class="exp-card-date">Aug 2025 · Present</div>
+        </div>
+        <div class="exp-card-role">AI/ML Intern · New York, USA</div>
+        <ul class="exp-card-bullets">
+          <li>Developed a SQL-to-vector RAG pipeline syncing hierarchical taxonomy data from MySQL to ChromaDB, enabling real-time semantic search via MiniLM-L6-v2 — improving data search term matches by 70%</li>
+          <li>Built a Hybrid RAG architecture integrating knowledge graphs and vector search, enabling structured, explainable retrieval and multi-hop reasoning over domain taxonomies</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-card-header">
+          <div class="exp-card-company">Bread Financial</div>
+          <div class="exp-card-date">Jan 2023 · Aug 2023</div>
+        </div>
+        <div class="exp-card-role">AI Engineer · Bengaluru, India</div>
+        <ul class="exp-card-bullets">
+          <li>Integrated a ML-based anomaly detection model into UiPath RPA via AWS SageMaker REST APIs, improving detection effectiveness by 18% while reducing false escalations</li>
+          <li>Built an AI-powered ticket triage automation using NLP-based classification models on AWS SageMaker, reducing mean resolution time by 20%</li>
+          <li>Designed and deployed auto recovery RPA solutions across UiPath Orchestrator, cutting bot downtime by 25%</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-card-header">
+          <div class="exp-card-company">Infosys Ltd</div>
+          <div class="exp-card-date">Sep 2019 · Jan 2022</div>
+        </div>
+        <div class="exp-card-role">Systems Engineer · Pune, India</div>
+        <ul class="exp-card-bullets">
+          <li>Optimized automation workflows by integrating API triggers and automating ticket resolutions, reducing average processing time by 30 minutes per task and improving CRM accuracy by 80%</li>
+          <li>Developed RPA bots to execute SQL queries and trigger API calls, minimizing UI automation failures and improving query efficiency by 3 seconds</li>
+          <li>Implemented dynamic workload balancing and auto-recovery in Automation Anywhere, cutting recovery time by 20 seconds per failure across 4+ teams</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div id="page-projects" class="page">
+  <div class="inner-page">
+    <button class="back-btn" onclick="showPage('home')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8L10 13" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back
+    </button>
+    <h1 class="page-title">Projects</h1>
+    <div class="proj-list">
+
+      <div class="proj-card">
+        <div class="proj-card-title">AI Digital Twin</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">FastAPI</span>
+          <span class="proj-tag">AWS Lambda</span>
+          <span class="proj-tag">Amazon S3</span>
+          <span class="proj-tag">CloudFront</span>
+          <span class="proj-tag">IAM</span>
+        </div>
+        <p class="proj-desc">Serverless conversational AI with persistent memory built on FastAPI and AWS Lambda, achieving <strong>sub-300ms API latency</strong> under serverless execution.</p>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-title">Deep Research Agentic AI Workflow</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">OpenAI Agents</span>
+          <span class="proj-tag">LangChain</span>
+          <span class="proj-tag">AsyncIO</span>
+          <span class="proj-tag">Gradio</span>
+          <span class="proj-tag">Pydantic</span>
+          <span class="proj-tag">OpenAI Tracing</span>
+        </div>
+        <p class="proj-desc">Multi-agent research platform coordinating 4 specialized agents (Planner, Search, Writer, Email) with async concurrency. Reduces research turnaround from hours to minutes across 20+ concurrent threads.</p>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-title">Political Sentiment &amp; Trend Analysis</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Apache Kafka</span>
+          <span class="proj-tag">NLP</span>
+          <span class="proj-tag">Reddit API</span>
+          <span class="proj-tag">NY Times API</span>
+          <span class="proj-tag">Plotly</span>
+        </div>
+        <p class="proj-desc">Real-time pipeline collecting Reddit and NYT data, applying LDA topic modeling to track U.S. 2024 election trends. XGBoost model achieved <strong>81.19% accuracy</strong> predicting trending election topics.</p>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-title">Product Price Prediction using LLMs</div>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">HuggingFace</span>
+          <span class="proj-tag">Ollama</span>
+          <span class="proj-tag">LoRA</span>
+          <span class="proj-tag">QLoRA</span>
+          <span class="proj-tag">Pandas</span>
+          <span class="proj-tag">NumPy</span>
+        </div>
+        <p class="proj-desc">Fine-tuned GPT-4, Claude, and LLaMA 3.1 on a 400K sample Amazon product dataset, outperforming linear regression and random forest baselines by <strong>20%</strong> with MSLE of 0.80.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="page-about" class="page">
+  <div class="inner-page">
+    <button class="back-btn" onclick="showPage('home')">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8L10 13" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Back
+    </button>
+    <h1 class="page-title">About</h1>
+    <div class="about-body">
+      <p>Hi! I'm a <strong>Data &amp; AI Engineer</strong> who builds intelligent systems at the intersection of machine learning, automation, and scalable backend infrastructure — turning messy data into decisions and ideas into deployable AI.</p>
+      <p>I hold a <strong>Master's in Information Systems from NYU</strong> and have 4+ years of engineering experience across AI/ML, RPA automation, and cloud infrastructure. I've shipped production ML systems at Alchemy Inc, Bread Financial, and Infosys Ltd.</p>
+      <p>I care about systems that are robust, explainable, and fast — not just demos that look good in a notebook.</p>
+      <p>Reach me at <a href="mailto:as18757@nyu.edu">as18757@nyu.edu</a> or <a href="tel:5512298434">551-229-8434</a></p>
+    </div>
+    <div class="skills-section">
+      <h3>Languages &amp; Databases</h3>
+      <div class="skills-row">
+        <span class="skill-pill">Python</span><span class="skill-pill">C/C++</span><span class="skill-pill">JavaScript</span>
+        <span class="skill-pill">MySQL</span><span class="skill-pill">MongoDB</span><span class="skill-pill">PostgreSQL</span>
+        <span class="skill-pill">ChromaDB</span><span class="skill-pill">Cassandra</span>
+      </div>
+      <h3>ML &amp; Data</h3>
+      <div class="skills-row">
+        <span class="skill-pill">PyTorch</span><span class="skill-pill">TensorFlow</span><span class="skill-pill">NumPy</span>
+        <span class="skill-pill">Pandas</span><span class="skill-pill">Scikit-Learn</span><span class="skill-pill">LangChain</span>
+        <span class="skill-pill">HuggingFace</span><span class="skill-pill">OpenAI</span><span class="skill-pill">Apache Airflow</span>
+      </div>
+      <h3>Cloud &amp; DevOps</h3>
+      <div class="skills-row">
+        <span class="skill-pill">AWS SageMaker</span><span class="skill-pill">Lambda</span><span class="skill-pill">S3</span>
+        <span class="skill-pill">GCP</span><span class="skill-pill">Jenkins</span><span class="skill-pill">FastAPI</span>
+        <span class="skill-pill">UiPath</span><span class="skill-pill">Automation Anywhere</span><span class="skill-pill">Azure ML</span>
+      </div>
+      <h3>Certifications</h3>
+      <div class="skills-row">
+        <span class="skill-pill">AA Advanced RPA Professional V11.0</span>
+        <span class="skill-pill">Google Data Analytics</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const el = document.getElementById('page-' + id);
+    if (el) {
+      el.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  }
+</script>
+</body>
+</html>
